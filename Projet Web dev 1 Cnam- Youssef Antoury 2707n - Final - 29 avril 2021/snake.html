@@ -1,0 +1,449 @@
+<html>
+<head>
+<title> Snake </title>
+<link rel="icon" type="image/png" href="final logo web 1 2021 gamestonks favicon.png"/>
+
+<style>
+
+body{
+background-image:url("gamebackground1snake.png");
+background-repeat:no-repeat;
+ background-size: cover;
+}
+
+.controlpanel{
+display:inline-block;
+position:relative;
+left:5%;
+top:15%;
+height:70%;
+width:20%;
+border-radius:80px;
+background-image: radial-gradient(circle, rgba(255,255,255,0),rgba(255,255,255,0.25));
+box-shadow:inset 0px 0px 60px 2px rgba(255,255,255,0.5),0px 0px 10px 1px rgba(0,0,0,1);
+}
+
+.gamePanel{
+display:inline-block;
+  position:absolute;
+  height: 80%;
+  width: 65%;
+  top:10%;
+  left:30%;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);  
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.controlButton{
+left:25%;
+top:15%;
+width:50%;
+height:13%;
+position:relative;
+display: inline-block;
+border:none;
+border-radius:40px;
+box-shadow:3px 3px 10px 1px black;
+outline: none;
+color:#ffffff;
+font-size:1.5vw;
+font-family:Courier New;
+text-align:center;
+}
+.centeredTXT{
+color:#ffffff;
+font-size:1.5vw;
+font-family:Courier New;
+text-align:center;
+display:inline-block;
+position:relative;
+top:30%; 
+}
+
+#startButton:hover{
+box-shadow:inset 0px 0px 15px 5px #eeeeee,3px 3px 10px 1px black;
+}
+
+.gameGrid{
+display:inline-block;
+position:relative;
+top:20%;
+left:20%;
+width:60%;
+height:60%;
+overflow:visible;
+
+}
+
+.pixelBox{
+display:inline-block;
+position:relative;
+width:1.4%;
+height:2%;
+font-size:0.5vw;
+overflow:hidden;
+color:white;
+
+}
+
+
+.gtitle{
+top:9%;
+left:12%;
+font-size:2vw;
+font-family:arial black;
+text-align:center;
+display:inline-block;
+position:absolute;
+color:white;
+}
+
+.backb{
+top:85%;
+left:13%;
+font-size:1.4vw;
+font-family:arial black;
+text-align:center;
+display:inline-block;
+position:absolute;
+color:#99aadd;
+}
+
+a{
+color:#6688bb;
+text-decoration:none;
+}
+a:visited{
+color:#5577aa;
+text-decoration:none;
+}
+a:hover{
+color:#aabbee;
+text-decoration:none;
+}
+</style>
+
+
+
+</head>
+
+
+
+<body>
+
+<div class="gtitle">Snake</div>
+<div id="controls" class="controlPanel">
+<button id="startButton" onclick="updateState()" style="background-color:#43f057;cursor:pointer" class="controlButton" >START</button>
+<div id="Score" class="controlButton" style="margin-top:10%;background-color:rgba(0, 104, 248,0.6)"></div>
+<div id="Lives" class="controlButton" style="margin-top:10%;background-color:rgba(0, 104, 248,0.3)"></div>
+<div id="Level" class="controlButton" style="margin-top:10%;ghhghbackground-color:rgba(0, 104, 248,0.1)"></div>
+</div >
+<div class="backb"> <a href="gamestonkssite.html">back</a></div>
+<div id="gameboard" class="gamePanel"></div>
+
+
+<script language="javascript" >
+
+var x= 70;
+var y= 50;
+var snakeColor="cyan";
+var player={lives:8,score:0,level:1};
+
+var gameState = 0;
+
+var snakeHead=[{x:31,y:25}];
+
+var direction=[-1,0];
+
+var snakeParam={speed:130,length:3};
+var snakeBody = [{x:31,y:25},{x:31,y:25}];
+var Wcolor = "lime";
+
+var food=1;
+function updateState(){
+
+gameState++;
+if(gameState==1){
+
+snakeHead=[{x:31,y:25}];
+var btn = document.getElementById("startButton");
+btn.style.backgroundColor="#ff7824";
+btn.style.color="black";
+btn.innerHTML="PAUSE";
+moveSnake();
+}
+if(gameState>=2){
+alert("you paused the game");
+}
+}
+
+
+function generateGrid(x,y){
+var grid="<div class=\"gameGrid\">";
+for(var j=0;j<y;j++){
+	for(var i=0;i<x;i++){
+		grid+= "<div id=\"pixel"+j+"-"+i+"\"class=\"pixelBox\"></div>";
+	}
+	grid+= "<br>";
+}
+grid+= "</div>";
+document.getElementById("gameboard").innerHTML=grid;
+}
+
+function generateLevel(){
+var levelNum = player.level;
+switch(levelNum){
+case 1:
+	
+    generateWalls(Wcolor);
+	document.getElementById("pixel25-35").style.backgroundColor=Wcolor;
+	break;
+case 2:
+	Wcolor="red";
+	generateWalls(Wcolor);
+	document.getElementById("pixel20-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel21-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel22-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel23-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel24-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel25-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel26-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel27-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel28-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel29-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel30-35").style.backgroundColor=Wcolor;
+	break;
+case 3:
+	Wcolor="yellow";
+	generateWalls(Wcolor);
+	for(var i=10;i<40;i++){
+	document.getElementById("pixel"+i+"-15").style.backgroundColor=Wcolor;
+	document.getElementById("pixel"+i+"-35").style.backgroundColor=Wcolor;
+	document.getElementById("pixel"+i+"-55").style.backgroundColor=Wcolor;
+	}
+}
+
+}
+
+function generateWalls(chroma){
+for(var i=0;i<x;i++){
+	document.getElementById("pixel0-"+i).style.backgroundColor=chroma;
+	}
+	for(var i=0;i<x;i++){
+	document.getElementById("pixel"+(y-1)+"-"+i).style.backgroundColor=chroma;
+	}
+	for(var j=0;j<y;j++){
+	document.getElementById("pixel"+j+"-0").style.backgroundColor=chroma;
+	}
+	for(var j=0;j<y;j++){
+	document.getElementById("pixel"+j+"-"+(x-1)).style.backgroundColor=chroma;
+	}
+}
+
+
+
+generateGrid(x,y);
+generateLevel();
+document.getElementById("Level").innerHTML="<span class=\"centeredTXT\">Level "+player.level+"</span>";
+document.getElementById("Score").innerHTML="<span class=\"centeredTXT\">Score "+player.score+"</span>";
+document.getElementById("Lives").innerHTML="<span class=\"centeredTXT\">Lives "+player.lives+"</span>";
+
+function showSnakeTail(k){
+
+document.getElementById("pixel"+snakeBody[k-snakeParam.length].y+"-"+snakeBody[k-snakeParam.length].x).style.backgroundColor="rgba(0,0,0,0)";
+
+
+}
+
+rNumX=1;
+rNumY=1;
+function generateFoodCoord(){
+rNumX=Math.ceil(Math.random()*(x-2));
+rNumY=Math.ceil(Math.random()*(y-2));
+}
+
+
+
+function generateFood(){
+
+var found =0;
+generateFoodCoord();
+if(document.getElementById("pixel"+rNumY+"-"+rNumX).style.backgroundColor==Wcolor && food<=9){
+while(found=0){
+generateFoodCoord();
+if(document.getElementById("pixel"+rNumY+"-"+rNumX).style.backgroundColor!=Wcolor && document.getElementById("pixel"+rNumY+"-"+rNumX).style.backgroundColor!=snakeColor){
+found=1;
+console.log(rNumX);
+}
+
+}
+
+}
+
+else if(document.getElementById("pixel"+rNumY+"-"+rNumX).style.backgroundColor!=Wcolor && food<=9){
+document.getElementById("pixel"+rNumY+"-"+rNumX).innerText=food;
+food=food+1;
+}
+else if(document.getElementById("pixel"+rNumY+"-"+rNumX).style.backgroundColor!=Wcolor && food >=9){
+
+alert("You won level"+player.level);
+player.level+=1;
+
+clearInterval(run);
+clearInterval(run);
+clearInterval(run);
+}
+}
+
+
+
+var keypressed=0;
+document.onkeydown = function(event) {
+keypressed =event.keyCode;
+
+switch (event.keyCode) {
+           case 32:
+               updateState();
+			   
+              break;
+			case 38:
+				if (direction[1]-1!=0){
+				direction=[0,-1];
+				
+				console.log("up");}
+				else{
+				direction=[0,1];}
+			break;
+			case 37:
+				if (direction[0]-1!=0){
+				direction=[-1,0];
+				
+				console.log("left");}
+				else
+				direction=[1,0];
+			break;
+			case 39:
+				if (direction[0]+1!=0){
+				direction=[1,0];
+				
+				console.log("right");}
+				else
+				direction=[-1,0];
+			break;
+			case 40:
+				if (direction[1]+1!=0){
+				direction=[0,1];
+				
+				console.log("down");}
+				else
+				direction=[0,-1];
+			break;
+			
+			
+        }
+
+}
+var run;
+function moveSnake(){
+generateFood();
+run =setInterval(function(){
+
+if(direction[0]!=0){
+snakeHead[0].x=snakeHead[0].x+(direction[0]);}
+else if (direction[1]!=0){
+snakeHead[0].y=snakeHead[0].y+(direction[1])
+}
+if(document.getElementById("pixel"+snakeHead[0].y+"-"+snakeHead[0].x).style.backgroundColor!=Wcolor && document.getElementById("pixel"+snakeHead[0].y+"-"+snakeHead[0].x).style.backgroundColor!=snakeColor ){
+document.getElementById("pixel"+snakeHead[0].y+"-"+snakeHead[0].x).style.backgroundColor=snakeColor;
+if(document.getElementById("pixel"+snakeHead[0].y+"-"+snakeHead[0].x).innerText==food-1){
+document.getElementById("pixel"+snakeHead[0].y+"-"+snakeHead[0].x).innerText="";
+snakeParam.length+=(food*3)-2;
+clearInterval(run);
+snakeParam.speed-=7;
+console.log(snakeParam.speed);
+console.log("s");
+moveSnake();
+player.score+=100;
+
+document.getElementById("Level").innerHTML="<span class=\"centeredTXT\">Level "+player.level+"</span>";
+document.getElementById("Score").innerHTML="<span class=\"centeredTXT\">Score "+player.score+"</span>";
+document.getElementById("Lives").innerHTML="<span class=\"centeredTXT\">Lives "+player.lives+"</span>";
+}
+snakeBody.push({x:snakeHead[0].x,y:snakeHead[0].y});
+showSnakeTail(snakeBody.length);
+
+
+
+}
+else{
+if(food!=10){
+alert("You Lost");
+player.lives-=1;
+}
+reset();
+if(player.lives==0){
+Wcolor="lime";
+player.lives=8;
+player.level=1;
+player.score=0;
+food=1;
+clearInterval(run);
+alert("You Lost");
+gameState=0; 
+clearBoard();
+var btn = document.getElementById("startButton");
+btn.style.backgroundColor="#43f057";
+btn.style.color="white";
+btn.innerHTML="START";
+snakeParam.speed=115;
+snakeParam.length=3;
+generateGrid(x,y);
+generateLevel();
+direction=[-1,0];
+
+}
+document.getElementById("Level").innerHTML="<span class=\"centeredTXT\">Level "+player.level+"</span>";
+document.getElementById("Score").innerHTML="<span class=\"centeredTXT\">Score "+player.score+"</span>";
+document.getElementById("Lives").innerHTML="<span class=\"centeredTXT\">Lives "+player.lives+"</span>";
+}
+},snakeParam.speed);
+console.log(snakeParam.speed);
+console.log(snakeBody);
+}
+
+function clearBoard(){
+for(var j=0;j<y;j++){
+	for(var i=0;i<x;i++){
+		document.getElementById("pixel"+[j]+"-"+[i]).style.backgroundColor="rgba(0,0,0,0)";
+	}
+}
+}
+
+function  reset(){
+food=1;
+clearInterval(run);
+gameState=0; 
+clearBoard();
+var btn = document.getElementById("startButton");
+btn.style.backgroundColor="#43f057";
+btn.style.color="white";
+btn.innerHTML="START";
+snakeParam.speed=115;
+snakeParam.length=3;
+generateGrid(x,y);
+generateLevel();
+snakeHead=[{x:31,y:25}];
+snakeBody=[{x:31,y:25},{x:31,y:25}];
+direction=[-1,0];
+player.score-=50;
+
+}
+
+</script>
+</body>
+
+</html>

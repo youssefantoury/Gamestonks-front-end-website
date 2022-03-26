@@ -1,0 +1,676 @@
+<html>
+<head>
+<title> Gamestonks </title>
+<link rel="icon" type="image/png" href="final logo web 1 2021 gamestonks favicon.png"/>
+<!---icons from <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>--->
+
+<style>
+body{
+max-width: 1000px;
+margin-left:25% ;
+
+}
+
+
+.header{
+position:absolute;
+display:inline-block;
+top:0px;
+height:12%;
+width:54%;
+padding:0em;
+overflow:visible;
+}
+.menu{
+position:absolute;
+display: inline-block;
+border-top-style:solid;
+border-top-width:0.3em;
+color:#361999;
+height: 100%;
+text-align:center;
+font-size:110%;
+font-family:arial;
+font-weight: bold;
+padding-top:6%;
+}
+.gamesbody{
+/*display:inline-block;*/
+display: inline-block;
+height:100%;
+top:13%;
+width:54%;
+position:absolute;
+overflow:visible;
+
+
+}
+
+
+
+
+.cat{
+diplay:inline-block;
+overflow-x:scroll;
+overflow-y:hidden;
+background-color:#ccc7d9;
+position:absolute;
+left:0%;
+top:2%;
+width:100%;
+height:4em;
+border-bottom:ridge;
+border-top:ridge;
+border-color:#dddafc;
+z-index:3;
+scroll-behavior: smooth;
+-ms-overflow-style: none;  /* Internet Explorer 10+ */
+scrollbar-width: none;  /* Firefox */
+}
+.cat::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.catbox{
+display:inline-block;
+position:absolute;
+top:6%;
+width:9%;
+height:89%;
+border-width:1%;
+border-right-style:groove;
+cursor:pointer;
+text-align:center;
+font-size:0.8vw;
+font-family:arial;
+font-weight:bold;
+
+}
+
+.slides{
+diplay:inline-block;
+background-color:#000000;
+position:relative;
+height: 35%;
+width:99.9%;
+top:5em;
+background:linear-gradient(to bottom,#ffffff,#dddddd);
+border-style:solid;
+border-color:#eeeeee;
+border-width:1px;
+}
+
+.piccat{
+height:70%;
+  /*filter: contrast(150%) brightness(100%) saturate(0%) ; black icons mybe orig and when hover in color*/
+}
+
+.picture{
+
+position:absolute;
+display:inline-block;
+overflow:hidden;
+border-radius:2em 2em 2em 2em;
+
+
+}
+.bttext{
+position:absolute;
+font-family: 'Roboto', sans-serif;
+font-size:110%;
+color:#111111;
+width:40%;
+display:inline-block;
+word-wrap:break-word;
+text-align: justify;
+text-justify: inter-word;
+}
+@keyframes moveleft{
+ from {  left: 0px; }
+to{ left:-8px; }
+	}
+  
+@keyframes moveright{
+  from {left:-13px;}
+  to {left:0px;}
+}
+@keyframes dontmove{
+from{ left:0px ;}
+to{left:0.2px;}
+}
+
+.midbar{
+display:inline-block;
+position:relative;
+top:4.4em;
+height:8%;
+
+width:100%;
+font-size:140%;
+font-family:sans-serif;
+}
+.filter{
+display:inline-block;
+position:relative;
+width:30%;
+height:50%;
+font-size:1em;
+font-family:sans-serif;
+border-radius:4em;
+border:5px solid #cabacc;
+}
+
+.evergreencontainer{
+overflow-y:auto;
+
+position:relative;
+top:0%;
+left:0%;
+width:75%;
+height:95%;
+border-radius:20px;
+background-color: #f0f0ff;
+border-bottom:1em solid #f0f0ff;
+border-top:1em solid #f0f0ff;
+}
+
+#gamescontainer::-webkit-scrollbar
+{
+	width:  0.4em;
+	background-color: rgba(0.9,0.9,0.9,0);
+}
+#gamescontainer::-webkit-scrollbar-track {
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+}
+#gamescontainer::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0.9,0.9,0.9,0);
+	background-color: #dddddd;
+}
+
+#gamescontainer {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.game_item{
+	position:relative;
+		display: inline-block;
+		width: 26%;
+		height: 50%;
+		background-color: #ffffff;
+		border: 3px white solid;
+		margin-left:5% ;
+		margin-top:5%;
+		overflow:hidden;
+		border-radius:20px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		cursor:pointer;
+}
+
+.image_frame{
+width:100%;
+height:56%;
+margin-bottom:4px;
+
+}
+
+.title_font{
+font-size:0.85vw;
+position:relative;
+
+font-family:arial,sans-serif;
+font-weight:bold;
+left:4%;
+}
+
+.subtitle_font{
+position:absolute;
+
+font-size:0.73vw;
+font-family:arial,sans-serif;
+left:4%;
+}
+
+.rating_class{
+position:absolute;
+width:50%;
+top:88%;
+}
+
+.rgamecard{
+position:relative;
+height:26%;
+display:inline-block;
+overflow:hidden;
+margin-top:7%;
+width:88%;
+margin-left:5%;
+border-radius:20px;
+background-color:#ffffff;
+cursor:pointer;
+}
+
+.rgameimage{
+position:relative;
+border-radius:20px 0px 0px 20px;
+margin-left:2%;
+margin-top:1.5%;
+width:37%;
+height:96%;
+overflow:hidden;
+}
+
+.gamelabel{
+display:inline-block;
+position:absolute;
+left:40%;
+top:2%;
+width:58%;
+height:95%;
+overflow:hidden;
+word-wrap: break-word;
+}
+
+.rtitle_font{
+font-size:0.79vw;
+position:relative;
+
+font-family:arial,sans-serif;
+font-weight:bold;
+left:4%;
+}
+
+.rsubtitle_font{
+position:absolute;
+
+font-size:0.67vw;
+font-family:arial,sans-serif;
+left:4%;
+}
+
+.rrating_class{
+position:absolute;
+width:45%;
+top:88%;
+}
+
+a:link{
+  color:black;
+}
+a:visited{
+  color:black;
+}
+
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+
+<script language="javascript">
+
+
+
+setInterval(function(){ var elmnt = document.getElementById('categ');
+var x = elmnt.scrollLeft;
+if(x>=51){
+document.getElementById("leftb").style.display = "inline";
+document.getElementById("rightb").style.display = "none";
+}
+else if(x<49){
+document.getElementById("leftb").style.display = "none";
+document.getElementById("rightb").style.display = "inline";
+}
+ }, 200); 
+
+function scrollleft(){
+document.getElementById('categ').scrollLeft += 100;
+
+}
+function scrollright(){
+document.getElementById('categ').scrollLeft -= 100;
+
+}
+
+var state=0;
+function next(){
+translate(-1);
+state=state+1;
+if(state>2){
+state=0;
+}
+
+checkstate(-1);
+translate(-1);
+}
+function before(){
+
+
+state=state-1;
+
+if(state<0){
+state=2;
+}
+
+
+checkstate(+1);
+}
+
+function checkstate(x){
+if(state==0){
+document.getElementById("box1").src = "amongus.png";
+document.getElementById("box2").src = "cyberbug.jpg";
+document.getElementById("box3").src = "minecraft.jpg";
+
+}
+else if(state==1){
+document.getElementById("box3").src = "amongus.png";
+document.getElementById("box1").src = "cyberbug.jpg";
+document.getElementById("box2").src = "minecraft.jpg";
+
+}
+else if(state ==2){
+document.getElementById("box2").src = "amongus.png";
+document.getElementById("box3").src = "cyberbug.jpg";
+document.getElementById("box1").src = "minecraft.jpg";
+
+}
+
+translate(x);
+}
+
+function translate(x){
+
+if(x<0){
+//cubic-bezier(.25,1.15,.29,.97)
+//element.style.webkitAnimationPlayState="paused";
+//element.style.webkitAnimationPlayState="running";
+
+setTimeout(function(){document.getElementById("box1").style.animation = "moveleft 3.5s cubic-bezier(0,.86,0,.99) infinite";
+document.getElementById("box2").style.animation = "moveleft 3.5s cubic-bezier(0,.86,0,.99) infinite";
+document.getElementById("box3").style.animation = "moveleft  3.5s cubic-bezier(0,.86,0,.99) infinite ";},40);
+clearTimeout();
+
+/*document.getElementById("box1").style.left="0px";
+document.getElementById("box1").style.transition="left 2s";
+document.getElementById("box1").style.left="-10px"
+*/
+
+}
+if(x>0){
+//document.getElementById("box1").style.webkitAnimationPlayState="running";
+//document.getElementById("box2").style.WebkitAnimationPlayState="running";
+//document.getElementById("box3").style.WebkitAnimationPlayState="running";
+setTimeout(function(){document.getElementById("box1").style.animation = "moveright 2.5s cubic-bezier(0,.86,0,.99) infinite";
+document.getElementById("box2").style.animation = "moveright 2.5s cubic-bezier(0,.86,0,.99) infinite";
+document.getElementById("box3").style.animation = "moveright 2.5s cubic-bezier(0,.86,0,.99) infinite";},40);
+//document.getElementById("box1").style.webkitAnimationPlayState="paused";
+//document.getElementById("box2").style.webkitAnimationPlayState="paused";
+//document.getElementById("box3").style.webkitAnimationPlayState="paused";
+}
+
+
+
+}
+
+setInterval(
+function(){ next();
+
+ }, 3500); 
+
+
+
+//WARNING:start of spaghetti code;
+
+
+
+function itemGen(name,subtitle,rating,image,link){
+ this.title = function(){
+return name;
+}
+ this.sub = function(){
+ return subtitle;
+}
+ this.rating = function(){
+ return "stars rating-0"+rating+".png";
+}
+this.image = function(){
+ return image+".jpg";
+}
+this.link =link;
+}
+var apex = new itemGen("Apex","Battle Royale",4,"apex");
+var amongus = new itemGen("Among us","Kill your friends in the new map!",5,"amongus");
+var baseball = new itemGen("Baseball","Boring",0,"baseball");
+var chef = new itemGen("RESTorrent","Just Try it",3,"chef");
+var clothing1 = new itemGen("Barbie 1","Unlike anything that you have seen",5,"clothing");
+var clothing2 = new itemGen("Barbie 2","Unlike anything that you have seen",5,"clothing");
+var clothing3 = new itemGen("Barbie 3","Unlike anything that you have seen",5,"clothing");
+var clothing4 = new itemGen("Barbie 4","Unlike anything that you have seen",5,"clothing");
+var wtf = new itemGen("Really?","Who play these?",2,"clothing");
+var clothing5 = new itemGen("Dress","The real deal",4,"clothing");
+var basedef = new itemGen("Base Defense","Defend your base as if it wasn't clear enough",3,"commandconquer");
+var baseattac = new itemGen("Base Attack","Attack other bases",3,"commandconquer");
+var commandconquer = new itemGen("Command and Conquer","Base attack and defense Together!",4,"commandconquer");
+var commandconquer2 = new itemGen("Command & Conquer 2","Old game is good, But it can be Better!",5,"commandconquer");
+var commandconquercook = new itemGen("Command & Conquer Generals ","Cooking Anbushes !",5,"commandconquer");
+var cookinglunch = new itemGen("Barbie Cooking Lunch","Kitchen",1,"cooking");
+var cookingbreakfast = new itemGen("Barbie Cooking Breakfast","Same Kitchen",1,"cooking");
+var cookingdinner = new itemGen("Barbie Cooking Dinner","Not a date guide",0,"cooking");
+var csgo = new itemGen("CS:GO","Better than Fortnite",5,"csgo");
+var csgo2 = new itemGen("Also CS:GO","So famous we placed 2",5,"csgo");
+var cyberbug = new itemGen("Cyberbug patch 1.2","Buggy life simulator, with less bugs",1,"cyberbug");
+var fatball = new itemGen("Fatball","One team divided in itself",1,"fatball");
+var fifaknockoff  = new itemGen("Fifa 99 to 21 knock offs","all the same",3,"fatball");
+var formula = new itemGen("Formula 1","Lose to Lewis Hamilton ",4,"formula");
+var driver = new itemGen("Silly Driver","I was gonna make a car pun, but I ran out of gas.",4,"fugitive");
+var fugitive = new itemGen("Fugitive","Run Run Run ...or drive",5,"fugitive");
+var horizon = new itemGen("Horizon","Can't touch this... PS4 exclusive",4,"horizon");
+var horizonnokoff = new itemGen("Zero Dawn","Copy of original adventure",5,"horizon");
+var cookingsponge = new itemGen("Spongebob Chef","Decent cooking game",3,"kidchef");
+var makeover = new itemGen("Makeup Makeover","Put plastic on your model",0,"makeup");
+var newmakeover = new itemGen("Makeover on Makeover","Put more plastic on your model",1,"makeup");
+var minecraft = new itemGen("Minecraft","Best Game Ever",5,"minecraft");
+var monopoly = new itemGen("Monopoly","Destroy your friendships",5,"monopoly");
+var nba = new itemGen("Basketball","Team work make the dream work",4,"nbarip");
+var phishing = new itemGen("Phishing","Catch as many victims as you can",3,"phishing");
+var pool = new itemGen("Pool","Billiard",3,"pool");
+var pubg = new itemGen("PUBG","Battle Royale, perfect for arabs",3,"pubg");
+var racing = new itemGen("GT race","Don't crash",2,"racing");
+var rally = new itemGen("Rally","Go off road",3,"rally");
+var rugby = new itemGen("Amerca Football","Not as violent as IRL",1,"rugby");
+var snake = new itemGen("Snake","Must be played",5,"snake","snake.html");
+var tennis = new itemGen("Table tennis","Tennis on a table",2,"tennis");
+var tetris = new itemGen("Tetris","Addictive",5,"tetris","tetris.html");
+var valorant = new itemGen("Valorant","It's an ad ",4,"valorant");
+var wotanks = new itemGen("World of Tanks","Kaboom?",3,"wotanks");
+var wowarcraft = new itemGen("World of Warcaft","For fantasy and wizards fans",5,"wowarcraft");
+console.log(snake.link);
+//
+var myDataNotYours = [["Action Games",apex,basedef,baseattac,csgo,fugitive,horizon,pubg,snake,valorant],
+["Adventure Games",minecraft,baseattac,cyberbug,fugitive,horizon,horizonnokoff,phishing,pubg,wowarcraft,rally],
+["Arcade Games",amongus,csgo,fifaknockoff,snake,tetris,basedef,baseattac,commandconquer,commandconquer2],
+["Girl Games",clothing1,clothing2,clothing3,clothing4,wtf,clothing5,makeover,newmakeover],
+["Kids Games",chef,phishing,amongus,fatball,commandconquercook,cookingsponge,racing,makeover,clothing5],
+["Money Games",monopoly,wowarcraft,commandconquer,commandconquer2,phishing,csgo,chef,fugitive],
+["Multiplayer Games",amongus,apex,monopoly,minecraft,tennis,valorant,pubg,formula,csgo,csgo2,nba],
+["Puzzle Games",tetris,phishing,amongus,snake,wowarcraft,fugitive,commandconquer2,csgo2],
+["Racing Games",formula,driver,fugitive,racing,rally,wotanks,cyberbug,pubg],
+["Shooting Games",csgo,csgo2,apex,pubg,valorant,wotanks,cyberbug,fatball],
+["Sport Games",baseball,fifaknockoff,nba,tennis,rugby,pool,formula,rally],
+["Strategy Games",snake,tetris,fugitive,phishing,commandconquercook,cookinglunch,cookingbreakfast,cookingdinner,chef,cookingsponge,wowarcraft,wotanks],];
+
+var tab1=myDataNotYours[0];
+var tab2=tab1[1];
+var tab3=tab1;
+var checklist=[0,0,0,0];
+
+function check(number, list){
+var xx=0;
+for(i=0;i<list.length;i++){
+if (number==list[i]){
+xx=-1;
+}
+}
+return xx;
+}
+
+
+function displayitems(index)
+{
+	var checklist=[0,0,0,0];
+	document.getElementById("gamescontainer").style.display="inline-block";
+	var catItems = myDataNotYours[index];
+	var str = "<span style=\"position:relative;margin-left:5%;top:0.5em;font-size:1.7em;font-weight:semi-bold;font-family:'arial',sans-serif\">"+catItems[0]+"</span><br><br>";
+	var randomstr="<span style=\"position:relative;margin-left:8%;top:0.5em;font-size:1.4em;font-weight:bold;font-family:'arial',sans-serif\">Most Popular</span><br>";
+	console.log(catItems.length);
+	var i=1;
+	while(  i<=3){
+	var randomNum = Math.ceil(Math.random()*(catItems.length-1));
+	var tab1=myDataNotYours[index];
+	if (check(randomNum,checklist)==0){
+	tab3=tab1[randomNum];
+	checklist[i]=randomNum;
+	
+	
+	randomstr+="<a href=\""+tab3.link+"\" target=\"_blank\"><div class=\"rgamecard\"><div class=\"rgameimage\"><img style=\"position:absolute;left:-40%;height:99%\" src=\"games_images/"+tab3.image()+
+	"\" ></img></div><div class=\"gamelabel\"><span class=\"rtitle_font\">"+tab3.title()+"</span><br><span class=\"rsubtitle_font\" >"+tab3.sub()+
+			"</span><img class=\"rrating_class\" src=\""+tab3.rating()+"\"></img></div></div></a>";
+	
+	i++;
+	}}
+	
+	//var itemname = catItem[i].title();
+	for(var i=1; i<catItems.length; i++)
+	{   
+	    var tab1=myDataNotYours[index];
+		var tab2=tab1[i];
+		//console.log(tab2);
+		
+		str += "<a href=\""+tab2.link+"\" target=\"_blank\"><div  class=\"game_item\" onclick=\"javascript:void()\"><img class=\"image_frame\" src=\"games_images/"+tab2.image()+"\"></img>" +  
+			"<br><span class=\"title_font\">"+tab2.title()+"</span><br><span class=\"subtitle_font\" >"+tab2.sub()+
+			"</span><img class=\"rating_class\" src=\""+tab2.rating()+"\"></img></div></a>";
+	}
+	str=str+"<br><br>"
+	document.getElementById("random_games").innerHTML = randomstr;
+	document.getElementById("gamescontainer").innerHTML = str;
+	console.log(str);
+}
+
+
+//
+
+</script>
+</head>
+
+<body>
+
+
+<div class="header"  >
+<div style="diplay: inline;"><img src="the final final final logo web 1 2021 gamestonks.png" style="position:absolute;  left:1%; top:0.02em; height:99%"></img></div>
+<a	href="gamestonkssite.html "><div class="menu" style="left:56% ; opacity:100%; border-top-color:rgba(54, 25, 153, 1) ">Games</div></a>
+<a	href="gamestonkssite -aboutus .html ">	<div class="menu" style="left:69% ; opacity:50%; border-top-color:rgba(54,25,153,0)">About Us</div></a>
+<a  href="gamestonkssite - contactus.html"><div class="menu" style="left:85% ; opacity: 50%;border-top-color:rgba(54,25,153,0)">Contact Us</div></a>
+</div>
+
+
+<div class="gamesbody">
+<div id="categ" class="cat">
+<table>
+<td onclick="javascript:displayitems(0)" class="catbox" style="left:0%;cursor:pointer"><img class="piccat" src="023-bomb.png"></img><br>Action</td>
+<td onclick="displayitems(1)" class="catbox" style="left:9%;"><img class="piccat" src="025-sword.png"></img><br>Adventure</td>
+<td onclick="displayitems(2)" class="catbox" style="left:18%"><img class="piccat" src="017-gamepad.png"></img><br>Arcade</td>
+<td onclick="displayitems(3)" class="catbox" style="left:27%"><img class="piccat" src = "029-heart.png"></img><br>Girls</td>
+<td onclick="displayitems(4)" class="catbox" style="left:36%"><img class="piccat" src="012-ghost.png"></img><br>Kids</td>
+<td onclick="displayitems(5)" class="catbox" style="left:45%"><img class="piccat" src="030-diamond.png"></img><br>Money</td>
+<td onclick="displayitems(6)" class="catbox" style="left:54%"><img class="piccat" src="013-tic tac toe.png"></img><br>Multiplayer</td>
+<td onclick="displayitems(7)" class="catbox" style="left:63%"><img class="piccat" src="031-tetris.png"></img><br>Puzzle</td>
+<td onclick="displayitems(8)" class="catbox" style="left:72%"><img class="piccat" src="036-racing game.png"></img><br>Racing</td>
+<td onclick="displayitems(9)" class="catbox" style="left:81%"><img class="piccat" src="021-target.png"></img><br>Shooting</td>
+<td onclick="displayitems(10)" class="catbox" style="left:90%"><img class="piccat" src="003-basketball.png"></img><br>Sport</td>
+<td onclick="displayitems(11)"  style="left:99%; diplay:inline-block; position:absolute; top:6%; width:9%; height:89%;text-align:center;
+font-size:80%;cursor:pointer;
+font-family:arial;
+font-weight:bold;"><img class="piccat" src="032-maze.png"></img><br>Strategy</td>
+<!--<td  style="left:108%; diplay:inline-block; position:absolute; top:6%; width:9%; height:89%;"></td>-->
+
+
+<!-- brightness(100%) contrast(250%) light purple arrow--->
+</table>
+
+
+<div id="leftb"  style="left:5%; position: sticky; display:none;top:8%;width:8%;height:89%"><a href="javascript:void()" onclick="scrollright()" ><img style="filter: hue-rotate(100deg) brightness(70%) contrast(250%) drop-shadow(0px 0px 0.43em black); height:90% "src="arrowleft.png"></img></a></div>
+<div id="rightb" style="left:90%; position: sticky; display: inline;top:8%;width:8%;height:89%"><a href="javascript:void()" onclick="scrollleft()" ><img style="filter: hue-rotate(100deg) brightness(70%) contrast(250%) drop-shadow(0px 0px 0.43em black); height:90%" src="arrow.png"></img></a></div>
+
+</div>
+
+
+
+
+
+<div class="slides">
+<div  style="overflow:hidden;display:inline-block;position:absolute;width:24%;height:90%;left:1%;top:4%;z-index:3">
+<img id="box1" src="amongus.png" style="animation :dontmove 3.5s linear infinite;position:absolute;height:100%;width:180%;top:2%"></img>
+</div>
+<div  style="background:linear-gradient(to bottom,#ffffff,#dddddd);overflow:hidden;display:inline-block;position:absolute;width:48%;height:90%;left:26%;top:4%;z-index:4">
+<img id="box2" src="cyberbug.jpg" style="animation :dontmove 3.5s linear infinite;position:absolute;height:100%;width:110%;top:2%"></img>
+</div>
+<div  style="overflow:hidden;display:inline-block;position:absolute;width:24%;height:90%;left:75%;top:4%;z-index:3">
+<img id="box3" src="minecraft.jpg" style="animation :dontmove 3.5s linear infinite;position:absolute;height:100%;width:180%;top:2%"></img>
+</div>
+</div>
+
+<div id="buttonarrowleft"  style="left:23%; position: absolute; display:inline-block ;top:23%;height:7%;z-index:5"><a href="javascript:before()"  ><img style="filter:hue-rotate(310deg) saturate(20%)  brightness(200%) contrast(250%) drop-shadow(0px 0px 0.43em black); height:90% "src="arrowclickleft.png"></img></a></div>
+<div id="buttonarrowright" style="left:71.5%; position: absolute; display:inline-block ;top:23%;height:7%;z-index:5"><a href="javascript:next()"  ><img style="filter:hue-rotate(310deg) saturate(20%)  brightness(200%) contrast(250%) drop-shadow(0px 0px 0.43em black); height:90%" src="arrowclickright.png"></img></a></div>
+
+<div class="midbar">
+
+<div style="width:9%;left:0%;top:16%;height:30%display:inline-block;position:absolute;font-size:1em" >Filters</div>
+
+<div onclick=""; id="multiplayerbutton" class="filter" style="left:2.9em;cursor: pointer; ">
+<div style="display:inline-block;position:absolute;height:100%;width:13%;border:4px #cabacc solid;border-radius:4em;top:-4px;left:-3px"><img src="multiplayer.png" style="position:absolute;height:100%;width:100%;filter: grayscale(100%) brightness(70%) contrast(200%)"></img>
+</div>
+<div style="position:absolute;display:inline-block;height:100%;width:100%;font-family:sans-serif;font-size:1em;text-align:center;top:15%">Multiplayer</div>
+
+</div>
+
+<div id="infiniteplaybutton" onclick="" class="filter" style="left:2.9em;cursor: pointer;">
+<div style="display:inline-block;position:absolute;height:100%;width:13%;border:4px #cabacc solid;border-radius:4em;top:-4px;left:-3px"><img src="infinite.png" style="position:absolute;height:100%;width:100%;filter: grayscale(100%) brightness(70%) contrast(200%)"></img>
+</div>
+<div style="position:absolute;display:inline-block;height:100%;width:100%;font-family:sans-serif;font-size:1em;text-align: center;top:15%">Infinite</div>
+</div>
+
+<div style="width:12%;left:0%;top:80%;height:19%;display:inline-block;position:absolute;font-size:0.9em;color:grey" >45 games</div>
+
+
+</div>
+
+<div style="display:inline-block;position:relative;width:100%;height:40%;margin-top:8em">
+<div id="gamescontainer" style="display:none" class="evergreencontainer">
+
+</div>
+
+
+<div id="random_games" style="position:absolute;left:76%;top:0%;display:inline-block;border-radius:20px;background-color: #f0f0ff;border-bottom:1em solid #f0f0ff;border-top:1em solid #f0f0ff;width:24%;height:95%">
+<span style="position:relative;margin-left:8%;top:0.5em;font-size:1.4em;font-weight:bold;font-family:'arial',sans-serif">Most Popular</span>
+</div>
+
+</div>
+<!--<div style="position:absolute;top:90%;width:17%;left:80%;overflow:visible;display:inline-block;height:8%">
+<a target="_blank" href="https://www.booked.net/weather/beirut-977"><img style="display: block;
+ position:absolute; margin-left: auto;
+  margin-right: auto;top:4%;
+  width: 80%"src="https://w.bookcdn.com/weather/picture/25_977_1_1_3658db_250_2a48ba_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=2&domid=w209&anc_id=82934"  alt="booked.net"/></a>
+</div>-->
+
+<!-- weather widget start -->
+<div style="position:relative; margin-top:3em;margin-left:30%;height:20%"><!-- weather widget start --><a target="_blank" href="https://www.booked.net/weather/beirut-977"><img src="https://w.bookcdn.com/weather/picture/3_977_1_1_137AE9_430_ffffff_333333_08488D_1_ffffff_333333_0_6.png?scode=2&domid=w209&anc_id=2734"  alt="booked.net"/></a><!-- weather widget end -->
+</div>
+
+</div>
+
+
+
+</body>
+</html>

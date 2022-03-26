@@ -1,0 +1,842 @@
+<html>
+<head>
+
+<title> Tetris </title>
+<link rel="icon" type="image/png" href="final logo web 1 2021 gamestonks favicon.png"/>
+
+
+</head>
+
+<style>
+body{
+background-image:url("gamebackground2.png");
+background-repeat:no-repeat;
+ background-size: cover;
+}
+
+.controlpanel{
+display:inline-block;
+position:relative;
+left:5%;
+top:20%;
+height:60%;
+width:20%;
+border-radius:80px;
+background-image: radial-gradient(circle, rgba(255,255,255,0),rgba(255,255,255,0.25));
+box-shadow:inset 0px 0px 60px 2px rgba(255,255,255,0.5),0px 0px 10px 1px rgba(0,0,0,1);
+}
+
+.gamePanel{
+display:inline-block;
+  position:absolute;
+  height: 80%;
+  width: 65%;
+  top:10%;
+  left:30%;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);  
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.controlButton{
+left:22.5%;
+top:15%;
+width:55%;
+position:relative;
+display: inline-block;
+border:none;
+border-radius:40px;
+box-shadow:3px 3px 10px 1px black;
+outline: none;
+color:#000000;
+font-size:1.5vw;
+font-family:Courier New;
+text-align:center;
+}
+
+.controlPlayButton{
+left:10%;
+top:15%;
+width:33%;
+height:13%;
+position:relative;
+display: inline-block;
+border:none;
+border-radius:40px;
+box-shadow:3px 3px 10px 1px black;
+outline: none;
+color:#000000;
+font-size:1.5vw;
+font-family:Courier New;
+text-align:center;
+margin-left:4%;
+}
+
+.centeredTXT{
+color:#ffffff;
+font-size:1.5vw;
+font-family:Courier New;
+text-align:center;
+display:inline-block;
+position:relative;
+top:30%; 
+}
+
+
+
+
+
+.gtitle{
+top:13%;
+left:12%;
+font-size:2vw;
+font-family:arial black;
+text-align:center;
+display:inline-block;
+position:absolute;
+color:#ffffff;
+text-shadow: 0px 0px 2px black;
+}
+
+
+.backb{
+top:83%;
+left:13%;
+font-size:1.4vw;
+font-family:arial black;
+text-align:center;
+display:inline-block;
+position:absolute;
+color:#ffffff;
+text-shadow: 0px 0px 1px black;
+}
+
+a{
+color:#ffffff;
+text-decoration:none;
+
+}
+a:visited{
+color:#ffffff;
+text-decoration:none;
+}
+a:hover{
+color:#ffffff;
+text-decoration:none;
+text-shadow: 0px 0px 5px black;
+}
+
+
+.gameGrid{
+
+display:inline-block;
+position:relative;
+top:0%;
+left:35%;
+width:30%;
+height:90%;
+overflow:visible;
+}
+
+.pixelBox{
+display:inline-block;
+position:relative;
+width:10%;
+height:5%;
+overflow:hidden;
+
+}
+
+.nextGameGrid{
+border-radius:10px;
+display:inline-block;
+position:relative;
+top:10%;
+left:0%;
+width:80%;
+height:80%;
+overflow:hidden;
+}
+
+.nextPixelBox{
+display:inline-block;
+position:relative;
+width:25%;
+height:25%;
+overflow:hidden;
+
+}
+
+
+.centeredTXT{
+color:#000000;
+font-size:1.5vw;
+font-family:arial;
+text-align:center;
+display:inline-block;
+position:relative;
+top:30%; 
+}
+
+</style>
+
+<body>
+<div class="gtitle">Tetris</div>
+<div id="controls" class="controlPanel">
+<button id="startButton" onclick="startState()" style="background-color:#fce25d;cursor:pointer" class="controlPlayButton" >START</button>
+<!-- for when clicked #c78df9-->
+<button id="pauseButton" onclick="pauseState()" style="background-color: #c78df9;cursor:pointer" class="controlPlayButton" >PAUSE</button>
+
+<div id="Next" class="controlButton" style="height:35%;margin-top:10%;background-color:rgba(0, 25, 60,0.5)"></div>
+<div id="Score" class="controlButton" style="height:13%;margin-top:10%;background-color:rgba(0, 240, 248,0.2)"></div>
+
+</div >
+<div class="backb"> <a href="gamestonkssite.html">back</a></div>
+
+
+
+
+
+
+<div id="gameboard" class="gamePanel"></div>
+
+
+
+
+<script language="javascript">
+//var function scope
+//let block scope
+var grid=[];
+var color=["rgba(0,0,0,0.5)","rgba(0,255,255,1)","rgba(255,142,0,1)","rgba(0,80,255,1)","rgba(255,255,0,1)","rgba(253,0,213,1)","rgba(189,0,255,1)","rgba(255,0,0,1)"];
+var run;
+var gameState=0;
+var currentPiece;
+var nextPiece;
+var nextGrid=[];
+var player={score:0}
+var y=1;
+var x=3;
+var newPieceY=0;
+var newPieceX=0;
+var yOrigin=1;
+var xOrigin=3;
+var oldPiece=[[0,0],[1,0],[2,0],[3,0]];
+var startDelete=0;
+var landedGrid=[];
+
+
+var tetrominoI={down:[[0,0,1,0],[0,0,1,0],[0,0,1,0],[0,0,1,0]],
+up:[[0,1,0,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]],
+left:[[0,0,0,0],[0,0,0,0],[1,1,1,1],[0,0,0,0]],
+right:[[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]]};
+var tetrominoJ={down:[[0,2,2,0],[0,2,0,0],[0,2,0,0],[0,0,0,0]],
+up:[[0,0,2,0],[0,0,2,0],[0,2,2,0],[0,0,0,0]],
+left:[[0,0,0,0],[2,2,2,0],[0,0,2,0],[0,0,0,0]],
+right:[[2,0,0,0],[2,2,2,0],[0,0,0,0],[0,0,0,0]]};
+var tetrominoL={down:[[0,3,3,0],[0,0,3,0],[0,0,3,0],[0,0,0,0]],
+up:[[3,0,0,0],[3,0,0,0],[3,3,0,0],[0,0,0,0]],
+left:[[0,0,0,0],[0,0,3,0],[3,3,3,0],[0,0,0,0]],
+right:[[0,0,0,0],[3,3,3,0],[3,0,0,0],[0,0,0,0]]};
+var tetrominoO={down:[[0,0,0,0],[4,4,0,0],[4,4,0,0],[0,0,0,0]],
+up:[[0,0,0,0],[4,4,0,0],[4,4,0,0],[0,0,0,0]],
+left:[[0,0,0,0],[4,4,0,0],[4,4,0,0],[0,0,0,0]],
+right:[[0,0,0,0],[4,4,0,0],[4,4,0,0],[0,0,0,0]]};
+var tetrominoS={down:[[0,5,5,0],[5,5,0,0],[0,0,0,0],[0,0,0,0]],
+up:[[0,0,0,0],[0,5,5,0],[5,5,0,0],[0,0,0,0]],
+left:[[0,5,0,0],[0,5,5,0],[0,0,5,0],[0,0,0,0]],
+right:[[5,0,0,0],[5,5,0,0],[0,5,0,0],[0,0,0,0]]};
+var tetrominoT={down:[[0,6,0,0],[6,6,6,0],[0,0,0,0],[0,0,0,0]],
+up:[[0,0,0,0],[6,6,6,0],[0,6,0,0],[0,0,0,0]],
+left:[[0,6,0,0],[0,6,6,0],[0,6,0,0],[0,0,0,0]],
+right:[[0,6,0,0],[6,6,0,0],[0,6,0,0],[0,0,0,0]]};
+var tetrominoZ={down:[[7,7,0,0],[0,7,7,0],[0,0,0,0],[0,0,0,0]],
+up:[[0,0,0,0],[7,7,0,0],[0,7,7,0],[0,0,0,0]],
+left:[[0,0,7,0],[0,7,7,0],[0,7,0,0],[0,0,0,0]],
+right:[[0,7,0,0],[7,7,0,0],[7,0,0,0],[0,0,0,0]]};
+
+
+
+
+var allTetrominos=[tetrominoI,tetrominoL,tetrominoJ,tetrominoO,tetrominoS,tetrominoT,tetrominoZ];
+
+
+function generateGrid(){
+for(var i=0;i<=21;i++){
+grid[i]=new Array(10);
+}
+}
+
+function generateLandedGrid(){
+for(var i=0;i<=21;i++){
+landedGrid[i]=new Array(10);
+}
+}
+
+
+function fillGrid(){
+var str="<div class=\"gameGrid\">";
+for(var i=0;i<=20;i++){
+for(var j=0; j<10;j++){
+grid[i][j]=0;
+str+= "<div id=\"pixel"+i+"-"+j+"\"class=\"pixelBox\" style=\"\"></div>"
+}
+str+="<br>";
+}
+str+="</div>";
+document.getElementById("gameboard").innerHTML=str;
+}
+
+
+function fillLandedGrid(){
+for(var i=0;i<=21;i++){
+for(var j=0; j<10;j++){
+landedGrid[i][j]=0;
+}
+}
+}
+
+function showGrid(){
+var index=0;
+for(var i=1;i<=20;i++){//i=1
+for(var j=0; j<10;j++){
+if(landedGrid[i][j]!=0){
+grid[i][j]=landedGrid[i][j];
+}
+index=grid[i][j];
+document.getElementById("pixel"+i+"-"+j).style.backgroundColor=color[index];
+}
+}
+
+console.log("showed");
+}
+
+function landPiece(){
+for(var i=1;i<=20;i++){//i=1
+for(var j=0; j<10;j++){
+landedGrid[i][j]=grid[i][j];
+
+}
+}
+}
+
+
+function generateNextGrid(){
+for(var i=0;i<4;i++){
+nextGrid[i]=new Array(4);
+}
+}
+
+function fillNextGrid(){
+var str="<div class=\"nextGameGrid\">";
+for(var i=0;i<4;i++){
+for(var j=0; j<4;j++){
+nextGrid[i][j]=0;
+str+= "<div id=\"npixel"+i+"-"+j+"\"class=\"nextPixelBox\" style=\"\"></div>"
+}
+str+="<br>";
+}
+str+="</div>";
+document.getElementById("Next").innerHTML=str;
+}
+
+function showNextGrid(){
+var index=0;
+for(var i=0;i<4;i++){
+for(var j=0; j<4;j++){
+index=nextGrid[i][j];
+document.getElementById("npixel"+i+"-"+j).style.backgroundColor=color[index];
+}
+}
+}
+
+function detectCollision(){
+detectLeftCollisionR();
+detectRightCollisionR();
+detectDownCollisionR();
+}
+function detectLeftCollisionR(){
+for(var i=0;i<4;i++){
+for(var j=0; j<4;j++){
+if(currentPieceDir[i][j]!=0){
+
+if(landedGrid[y+i][x+j]!=0 ){
+x=x+1;
+rotateState-=1;
+}
+
+
+}
+}
+}
+}
+
+function detectRightCollisionR(){
+for(var i=0;i<4;i++){
+for(var j=0; j<4;j++){
+if(currentPieceDir[i][j]!=0){
+
+if(landedGrid[y+i][x+j]!=0 ){
+x=x-1;
+rotateState-=1;
+}
+
+
+}
+}
+}
+}
+
+function detectDownCollisionR(){
+for(var i=0;i<4;i++){
+for(var j=0; j<4;j++){
+if(currentPieceDir[i][j]!=0){
+
+if(landedGrid[y+i][x+j]!=0 || y+i==21){
+
+//rotateState-=1; add only if rotation
+
+chooseTetrominos();
+}
+
+
+}
+}
+}
+}
+
+
+// left and right and down:
+function detectLeftCollision(){
+for(var i=0;i<4;i++){
+for(var j=0; j<4;j++){
+if(currentPieceDir[i][j]!=0){
+
+if(landedGrid[y+i][x+j]!=0 ){
+x=x+1;
+
+}
+
+
+}
+}
+}
+}
+
+function detectRightCollision(){
+for(var i=0;i<4;i++){
+for(var j=0; j<4;j++){
+if(currentPieceDir[i][j]!=0){
+
+if(landedGrid[y+i][x+j]!=0 ){
+x=x-1;
+
+}
+
+
+}
+}
+}
+}
+
+function detectDownCollision(){
+for(var i=0;i<4;i++){
+for(var j=0; j<4;j++){
+if(currentPieceDir[i][j]!=0){
+
+if(landedGrid[y+i][x+j]!=0 || y+i==21 ){
+
+//rotateState-=1; add only if rotation
+if(y==1){
+
+clearInterval(run);
+location.href = window.location;
+alert("you lost");
+
+
+}
+else{chooseTetrominos();
+}
+
+}
+
+
+}
+}
+}
+}
+
+function lost(){
+/*
+var pixCounter5=0;
+var pixCounter4=0;
+for(var i=1 ;i<=20;i++ ){
+if( landedGrid[i][5]!=0 || landedGrid[i][4]!=0 ){
+pixCounter5+=1;
+pixCounter4+=1;
+}
+}
+if(pixCounter5>18 || pixCounter4>18){
+
+location.href = window.location;
+alert("you lost");
+}
+*/
+
+
+
+}
+
+function startState(){
+gameState=1;
+
+document.getElementById("startButton").style.backgroundColor="#c78df9";
+document.getElementById("pauseButton").style.backgroundColor="#fce25d";
+
+}
+
+function pauseState(){
+gameState=0;
+
+document.getElementById("startButton").style.backgroundColor="#fce25d";
+document.getElementById("pauseButton").style.backgroundColor="#c78df9";
+
+}
+
+
+var currentPieceDir;
+var nextPieceDir;
+
+function chooseTetrominos(){
+//not the bag grab;
+	var randomTetro = Math.floor(Math.random()*(allTetrominos.length));
+	currentPiece=nextPiece;
+	nextPiece=allTetrominos[randomTetro];
+	nextPieceDir=nextPiece.right;
+	currentPieceDir=currentPiece.right;
+	newPieceY=1;
+	newPieceX=1;
+	cntTime=0;
+	x=xOrigin;
+	y=yOrigin;
+	landPiece();
+}
+
+
+
+
+function printPiece(xpos,ypos){
+
+var cntY=0;
+for(var cnti=ypos;cnti<(y+4);cnti++){
+var cntX=0;
+
+for(var cntj=xpos;cntj<(x+4);cntj++){
+
+if(currentPieceDir[cntY][cntX]>0){
+
+grid[cnti][cntj]=currentPieceDir[cntY][cntX];
+
+
+
+//startDelete+=1;
+}
+
+cntX++;
+}
+cntY++;
+}
+console.log("printed");
+}
+
+
+function printNextPiece(){
+
+
+for(var i=0;i<4;i++){
+for(var j=0;j<4;j++){
+
+nextGrid[i][j]=nextPieceDir[i][j];
+
+}
+}
+
+}
+
+
+
+var rotateState=1;
+function rotatePiece(){
+ rotateState++;
+ if(rotateState==0){
+currentPieceDir=currentPiece.up;
+console.log("up");
+} 
+  if(rotateState==1){
+currentPieceDir=currentPiece.right;
+console.log("right");
+} 
+if(rotateState==2){
+currentPieceDir=currentPiece.down;
+console.log("down");
+} 
+if(rotateState==3){
+currentPieceDir=currentPiece.left;
+rotateState=-1;
+console.log("left");
+} 
+cntTime=0;
+}
+
+
+var cntTime=0;
+
+function printInCenter(){
+if(cntTime==0){
+showGrid();
+fillGrid();
+showGrid();
+var stateCounter=0;
+
+for(var i=0;i<4;i++){
+if(currentPieceDir[0][i]!=0){
+stateCounter+=1;
+}
+}
+if(stateCounter==0 && newPieceY==1){
+y=y-1;
+//newPieceY=0;
+}
+
+stateCounter=0;
+for(var i=0;i<4;i++){
+if(currentPieceDir[i][3]!=0 ){
+stateCounter+=1;
+}
+}
+if(stateCounter==0 && newPieceX==1){
+x=x+1;
+//newPieceX=0;
+}
+
+newPieceX=0;
+newPieceY=0;
+console.log("before print");
+console.log("x"+x);
+console.log("y"+y);
+printPiece(x,y);//or originX and Originy ; or x=OrigX and Y =OrigY before +$-
+console.log("after print");
+console.log("x"+x);
+console.log("y"+y);
+cntTime+=1;
+}
+else{
+
+}
+
+}
+
+
+function line(){
+var ii=0;
+//var holderArray=[0,0,0,0,0,0,0,0,0,0];
+for( ii=0;ii<=20;ii++){
+var isLine=0;
+for(var j=0;j<10;j++){
+if(landedGrid[ii][j]!=0){
+isLine+=1;
+}
+if(isLine==10){
+for(var j=0;j<10;j++){
+landedGrid[ii][j]=0;
+
+}
+for(var i=ii;i>=1;i--){
+
+landedGrid[i]=landedGrid[i-1]
+
+}
+player.score+=1;
+
+}
+
+}
+}
+}
+
+
+function moveDown(){
+
+if(gameState==1){
+
+
+y=y+1;
+
+//to keep or not keep depending on bugs
+showGrid();
+printInCenter();
+//
+detectDownCollision();
+line();
+
+cntTime=0;
+}
+else{
+
+}
+}
+
+
+
+
+
+var btnSpace=0;
+var keypressed=0;
+document.onkeydown = function(event) {
+keypressed =event.keyCode;
+
+switch (event.keyCode) {
+           case 32:
+            btnSpace++;
+			console.log("space");
+			if(btnSpace==1){
+			startState();
+			}
+			if(btnSpace>1){
+			pauseState();
+			btnSpace=0;}
+			break;
+			case 38:
+			if(gameState==1){
+			console.log("upArrow");
+			
+			
+			rotatePiece();
+			detectCollision();
+			cntTime=0;
+			showGrid();
+			printInCenter();
+			
+			}
+			break;
+			case 37:
+			if(gameState==1){
+			console.log("leftArrow");
+			
+			
+
+			x=x-1;
+			detectLeftCollision();
+			cntTime=0;
+			showGrid();
+			printInCenter();
+			
+			}
+			break;
+			case 39:
+			if(gameState==1){
+			console.log("rightArrow");
+			
+			
+
+			x=x+1;
+			detectRightCollision();
+			showGrid();
+			printInCenter();
+			cntTime=0;
+			
+			
+			}
+			break;
+			case 40:
+			if(gameState==1){
+			console.log("downArrow");
+		
+			moveDown();
+			
+			showGrid();
+			printInCenter();
+
+			}
+			break;
+			case 72:
+			chooseTetrominos();
+			break;
+		}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+generateGrid();
+generateLandedGrid();
+fillGrid();
+fillLandedGrid();
+showGrid();
+generateNextGrid();
+fillNextGrid();
+showNextGrid();
+nextPiece=allTetrominos[Math.floor(Math.random()*(allTetrominos.length))];
+nextPieceDir=nextPiece.right;
+chooseTetrominos();
+document.getElementById("Score").innerHTML="<span class=\"centeredTXT\">Score "+player.score+"</span>";
+
+var ddown;//var function scope
+//let block scope 
+function loopStep(){
+
+if(gameState==1){
+
+
+
+showNextGrid();
+showGrid();
+printInCenter();
+
+printNextPiece();
+
+//moveDown();
+
+console.log(grid);
+
+
+
+
+
+
+document.getElementById("Score").innerHTML="<span class=\"centeredTXT\">Score "+player.score+"</span>";
+
+
+
+
+
+
+
+}
+else if (gameState==0){
+
+}
+}
+
+
+run=setInterval(function(){loopStep();},0);
+ddown=setInterval(function(){moveDown();},800);
+</script>
+
+
+
+</body>
+
+</html>
